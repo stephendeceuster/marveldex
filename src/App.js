@@ -8,12 +8,13 @@ import { MarvelCharacter } from "./components/MarvelCharacter";
 import "./App.css";
 
 const App = () => {
-
   return (
     <Router>
-      <Heading fontSize="xl" mb={5}>Marveldex</Heading>
-      
-        {/* <form>
+      <Heading fontSize="xl" mb={5}>
+        Marveldex
+      </Heading>
+
+      {/* <form>
           <Flex mb="3rem">
             <Input type="text" w="calc(100% - 4rem)" h="3rem" mr="auto" />
             <IconButton
@@ -24,7 +25,7 @@ const App = () => {
             />
           </Flex>
         </form> */}
-      
+
       <Switch>
         <Route exact path="/">
           <MarvelGrid />

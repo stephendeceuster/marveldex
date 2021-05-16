@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
-import useSWR, { mutate } from "swr";
+import React, { useState } from "react";
+import useSWR from "swr";
 import slugify from "slugify";
 import { Box, Image, Select, SimpleGrid, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -10,49 +10,42 @@ export const MarvelGrid = () => {
     page: 1,
     limit: 48,
   });
-  const base = "https://gateway.marvel.com/";
-  let apiVariables = `?offset=${
-    (showVars.page - 1) * showVars.limit
-  }&limit=48&apikey=bac0261e17798de947618f7e19ad79db`;
 
-  const fetcher = (url) => {
-    axios.get(base + url + apiVariables).then((res) => res.data.data);
-  };
-  const { data, error } = useSWR("v1/public/characters", fetcher);
+  const apiUrl = `https://gateway.marvel.com/v1/public/characters?limit=${
+    showVars.limit
+  }
+                    &offset=${(showVars.page - 1) * showVars.limit}
+                    &apikey=bac0261e17798de947618f7e19ad79db`;
+
+  const fetcher = (url) => axios.get(url).then((resp) => resp.data.data);
+
+  const { data, error } = useSWR(apiUrl, fetcher);
 
   return (
-    <p>
-     
-      {!data && !error && <p>Loading</p>}
+    <>
+      {!data && !error && <p>loading</p>}
       {error && <p>error</p>}
       {data && (
         <>
-          {console.log("render data")}
           <Select
-            placeholder="Go to page"
             mb={5}
+            defaultValue={showVars.page}
             onChange={(e) => {
-              setShowVars((showVars) => ({
-                ...showVars,
-                page: e.target.value,
+              setShowVars((prevShowVars) => ({
+                ...prevShowVars,
+                page: parseInt(e.target.value),
               }));
-
-              console.log("apiVariables", apiVariables);
-              console.log("showVars", showVars);
-              // mutate("v1/public/characters");
-              mutate();
-              console.log("after mutate");
             }}
           >
             {[...Array(Math.ceil(data.total / showVars.limit))].map((a, i) => (
               <option key={"page_" + i} value={i + 1}>
-                {i + 1}
+                page {i + 1}
               </option>
             ))}
           </Select>
           <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={5}>
             {data.results.map((hero) => (
-              <Box key={hero.id}>
+              <Box key={hero.id} position="relative">
                 <Link
                   to={`${hero.id}/${slugify(hero.name, {
                     replacement: "-",
@@ -65,13 +58,20 @@ export const MarvelGrid = () => {
                     src={`${hero.thumbnail.path}/standard_fantastic.${hero.thumbnail.extension}`}
                   />
                 </Link>
-                <Text>{hero.name}</Text>
+                <Text
+                  position="absolute"
+                  bottom="0"
+                  backgroundColor="rgba(255, 255, 255, 0.75)"
+                  width="100%"
+                  padding={2}
+                >
+                  {hero.name}
+                </Text>
               </Box>
             ))}
           </SimpleGrid>
-          {/* {[...Array(Math.ceil( data.total/48 ))].map((a, i) => <p>{i}</p>)} */}
         </>
       )}
-    </p>
+    </>
   );
 };
