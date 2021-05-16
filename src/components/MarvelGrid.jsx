@@ -57,16 +57,16 @@ export const MarvelGrid = () => {
                     borderRadius="0.5rem"
                     src={`${hero.thumbnail.path}/standard_fantastic.${hero.thumbnail.extension}`}
                   />
+                  <Text
+                    position="absolute"
+                    bottom="0"
+                    backgroundColor="rgba(255, 255, 255, 0.75)"
+                    width="100%"
+                    padding={2}
+                  >
+                    {hero.name}
+                  </Text>
                 </Link>
-                <Text
-                  position="absolute"
-                  bottom="0"
-                  backgroundColor="rgba(255, 255, 255, 0.75)"
-                  width="100%"
-                  padding={2}
-                >
-                  {hero.name}
-                </Text>
               </Box>
             ))}
           </SimpleGrid>
