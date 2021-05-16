@@ -16,14 +16,13 @@ export const MarvelGrid = () => {
   }&limit=48&apikey=bac0261e17798de947618f7e19ad79db`;
 
   const fetcher = (url) => {
-    // console.log("axios", apiVariables);
     axios.get(base + url + apiVariables).then((res) => res.data.data);
   };
   const { data, error } = useSWR("v1/public/characters", fetcher);
 
   return (
     <p>
-      {console.log("render")}
+     
       {!data && !error && <p>Loading</p>}
       {error && <p>error</p>}
       {data && (
