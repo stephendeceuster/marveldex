@@ -7,9 +7,9 @@ import App from "./App";
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-    <Box p="3rem">
+      <Box p="3rem">
         <App />
-   </Box>
+      </Box>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

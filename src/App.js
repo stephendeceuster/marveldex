@@ -1,6 +1,7 @@
 import React from "react";
-import { Flex, Heading, IconButton, Input } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+// import { Flex, Heading, IconButton, Input } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
+// import { SearchIcon } from "@chakra-ui/icons";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { MarvelGrid } from "./components/MarvelGrid";
 import { MarvelCharacter } from "./components/MarvelCharacter";
@@ -20,9 +21,9 @@ const App = () => {
 
   return (
     <Router>
-      <Heading fontSize="xl">Marveldex</Heading>
+      <Heading fontSize="xl" mb={5}>Marveldex</Heading>
       
-        <form>
+        {/* <form>
           <Flex mb="3rem">
             <Input type="text" w="calc(100% - 4rem)" h="3rem" mr="auto" />
             <IconButton
@@ -32,7 +33,7 @@ const App = () => {
               icon={<SearchIcon />}
             />
           </Flex>
-        </form>
+        </form> */}
       
       <Switch>
         <Route exact path="/">

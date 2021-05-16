@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import useSWR from "swr";
-import {  Image, Text } from "@chakra-ui/react";
+import { Heading, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export const MarvelCharacter = () => {
@@ -11,7 +11,6 @@ export const MarvelCharacter = () => {
   const fetcher = (url) =>
     axios.get(base + url + key).then((res) => res.data.data);
   const { data, error } = useSWR(`v1/public/characters/${id}`, fetcher);
-  console.log(data);
 
   return (
     <>
@@ -19,13 +18,16 @@ export const MarvelCharacter = () => {
       {error && <p>error</p>}
       {data && (
         <>
-        <Image
-        width ="100%"
-                  borderRadius="0.5rem"
-                  src={`${data.results[0].thumbnail.path}/portrait_uncanny.${data.results[0].thumbnail.extension}`}
-                />
-          <Text>{data.results[0].name}</Text>
-          <Text>{data.results[0].description}</Text>
+          <Image
+            mb={5}
+            width="100%"
+            borderRadius="0.5rem"
+            src={`${data.results[0].thumbnail.path}/portrait_uncanny.${data.results[0].thumbnail.extension}`}
+          />
+          <Heading as="h1" mb={5}>
+            {data.results[0].name}
+          </Heading>
+          <Text mb={5}>{data.results[0].description}</Text>
           <Link to="/">Back to home</Link>
         </>
       )}
