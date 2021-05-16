@@ -8,16 +8,6 @@ import { MarvelCharacter } from "./components/MarvelCharacter";
 import "./App.css";
 
 const App = () => {
-  // const base = "https://gateway.marvel.com/";
-  // const key = "?limit=48&apikey=bac0261e17798de947618f7e19ad79db";
-
-  // const fetcher = (url) =>
-  //   axios.get(base + url + key).then((res) => res.data.data);
-
-  // //  axios.get('https://gateway.marvel.com/v1/public/characters?apikey=bac0261e17798de947618f7e19ad79db').then(resp => console.log(resp));
-  // const { data, error } = useSWR("v1/public/characters", fetcher);
-
-  // console.log(data);
 
   return (
     <Router>
