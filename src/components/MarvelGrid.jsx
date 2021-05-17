@@ -5,11 +5,13 @@ import slugify from "slugify";
 import { Box, Image, Select, SimpleGrid, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export const MarvelGrid = () => {
-  const [showVars, setShowVars] = useState({
-    page: 1,
-    limit: 48,
-  });
+export const MarvelGrid = (props) => {
+  // const [showVars, setShowVars] = useState({
+  //   page: 1,
+  //   limit: 48,
+  // });
+  
+  const { showVars, setShowVars } = props;
 
   const apiUrl = `https://gateway.marvel.com/v1/public/characters?limit=${
     showVars.limit

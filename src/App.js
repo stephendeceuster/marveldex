@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { Flex, Heading, IconButton, Input } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 // import { SearchIcon } from "@chakra-ui/icons";
@@ -8,6 +8,11 @@ import { MarvelCharacter } from "./components/MarvelCharacter";
 import "./App.css";
 
 const App = () => {
+  const [showVars, setShowVars] = useState({
+    page: 1,
+    limit: 48,
+  });
+
   return (
     <Router>
       <Heading fontSize="xl" mb={5}>
@@ -28,7 +33,7 @@ const App = () => {
 
       <Switch>
         <Route exact path="/">
-          <MarvelGrid />
+          <MarvelGrid showVars={showVars} setShowVars={setShowVars}/>
         </Route>
         <Route path="/:id/:name">
           <MarvelCharacter />
